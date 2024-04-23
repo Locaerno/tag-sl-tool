@@ -1,0 +1,7 @@
+colorama
+requests
+bs4
+argparse
+telnetlib
+sms
+pystyle
